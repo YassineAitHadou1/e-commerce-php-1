@@ -1,3 +1,11 @@
+<?php 
+  session_start();
+  $connected = false;
+  if (isset($_SESSION['user'])) {
+    $connected = true;
+  }
+  var_dump($connected);
+?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">E COMMERCE</a>
@@ -9,9 +17,26 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="index.php">Add User</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">login</a>
-        </li>
+        <?php 
+        if($connected){
+          ?>
+              <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="addCategory.php">Add category</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="addProduct.php">Add product</a>
+          </li>
+          <?php
+        }else{
+          ?>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">login</a>
+            </li>
+          <?php
+        }
+        ?>
+       
+       
       </ul>
     </div>
   </div>
