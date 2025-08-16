@@ -22,13 +22,9 @@ include_once 'include/conn.php';
         $category = $_POST['category'];
 
         if (!empty($productName) && !empty($productPrice)  && !empty($category) ) {
-            $stmt = $pdo->prepare('insert into product values (null,?,?,?,?,null)');
-            $stmt->execute([$productName,$productPrice,$discount,$category]);   
-            ?>
-        <div class="alert alert-success" role="alert">
-            the <?php echo $productName?> product added
-        </div>
-        <?php
+            $stmt = $pdo->prepare('insert into product(productName,productPrice,discount,categoryId) values (?,?,?,?)');
+            $stmt->execute([$productName,$productPrice,$discount,$category]);
+            header('location:products.php');
         }else{
             ?>
             <div class="alert alert-danger" role="alert">
@@ -49,7 +45,7 @@ include_once 'include/conn.php';
   </div>
   <div class="mb-3">
     <label class="form-label">discount</label><br>
-    <input type="range" class="form-control" name="discount" min="1" max="80"></input>
+    <input type="range" class="form-control" name="discount" min="0" max="90"></input>
   </div>
   <pre>
   <?php
@@ -68,7 +64,7 @@ include_once 'include/conn.php';
     
     
   </select><br>
-  <input type="submit" value="Add Category" class="btn btn-primary btn-lg" name="add"></input>
+  <input type="submit" value="Add Product" class="btn btn-primary btn-lg" name="add"></input>
 </form>
 </div>
 </body>

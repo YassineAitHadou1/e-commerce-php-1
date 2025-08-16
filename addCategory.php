@@ -21,13 +21,7 @@ include 'include/nav.php'?>
         require_once 'include/conn.php';
         $stmt = $pdo->prepare('insert into category(categoryName,description) values(?,?)');
         $stmt->execute([$name,$desc]);
-        ?>
-        <div class="alert alert-success" role="alert">
-            the <?php echo $name?> category added
-        </div>
-        <?php
-
-
+            header('location:categories.php');
     }else{
         ?>
         <div class="alert alert-danger" role="alert">

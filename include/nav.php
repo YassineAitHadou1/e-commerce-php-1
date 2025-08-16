@@ -20,6 +20,12 @@
         if($connected){
           ?>
               <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="categories.php">categories</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="products.php">products</a>
+              </li>
+              <li class="nav-item">
               <a class="nav-link" aria-current="page" href="addCategory.php">Add category</a>
               </li>
               <li class="nav-item">
