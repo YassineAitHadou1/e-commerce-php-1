@@ -54,7 +54,7 @@ include 'include/nav.php';
             <label class="form-label">Password</label>
             <input type="password" class="form-control" name="password" >
         </div>
-        <input type="submit" value="Add User" class="btn btn-primary btn-lg" name="connect"></input>
+        <input type="submit" value="login" class="btn btn-primary btn-lg" name="connect"></input>
     </form>
 </div>
 </body>

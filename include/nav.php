@@ -4,7 +4,6 @@
   if (isset($_SESSION['user'])) {
     $connected = true;
   }
-  var_dump($connected);
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -25,7 +24,10 @@
               </li>
               <li class="nav-item">
               <a class="nav-link" aria-current="page" href="addProduct.php">Add product</a>
-          </li>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="logout.php">log out</a>
+              </li>
           <?php
         }else{
           ?>

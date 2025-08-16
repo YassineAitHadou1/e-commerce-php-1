@@ -18,7 +18,16 @@ include 'include/nav.php'?>
     $desc = $_POST['categoryDesc'];
 
     if (!empty($name) && !empty($desc)) {
-        
+        require_once 'include/conn.php';
+        $stmt = $pdo->prepare('insert into category(categoryName,description) values(?,?)');
+        $stmt->execute([$name,$desc]);
+        ?>
+        <div class="alert alert-success" role="alert">
+            the <?php echo $name?> category added
+        </div>
+        <?php
+
+
     }else{
         ?>
         <div class="alert alert-danger" role="alert">
