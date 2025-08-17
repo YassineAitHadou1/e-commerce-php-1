@@ -28,7 +28,7 @@ include 'include/nav.php'?>
                ?>
                <div class="alert alert-danger" role="alert">
                 login and password are required !
-            </div>
+                </div>
                <?php
             }
         

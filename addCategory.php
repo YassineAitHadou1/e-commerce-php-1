@@ -16,11 +16,12 @@ include 'include/nav.php'?>
    if(isset($_POST['add'])){
     $name = $_POST['categoryName'];
     $desc = $_POST['categoryDesc'];
+    $icon = $_POST['categoryIcon'];
 
-    if (!empty($name) && !empty($desc)) {
+    if (!empty($name) && !empty($desc) && !empty($icon)) {
         require_once 'include/conn.php';
-        $stmt = $pdo->prepare('insert into category(categoryName,description) values(?,?)');
-        $stmt->execute([$name,$desc]);
+        $stmt = $pdo->prepare('insert into category(categoryName,description,categoryIcon) values(?,?,?)');
+        $stmt->execute([$name,$desc,$icon]);
             header('location:categories.php');
     }else{
         ?>
@@ -39,6 +40,10 @@ include 'include/nav.php'?>
   <div class="mb-3">
     <label class="form-label">description</label><br>
     <textarea class="form-control" name="categoryDesc"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">icon</label><br>
+    <input type="text" class="form-control" name="categoryIcon"></input>
   </div>
   <input type="submit" value="Add Category" class="btn btn-primary btn-lg" name="add"></input>
 </form>

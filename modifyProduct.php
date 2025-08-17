@@ -36,10 +36,23 @@ include 'include/nav.php'?>
     <label class="form-label">discount</label><br>
     <input type="range" class="form-control" value="<?= $product->discount?>" name="discount"></input>
   </div>
-  <div class="mb-3" >
-    <label class="form-label">category</label>
-    <input type="text" class="form-control" value="<?= $product->categoryName?>" name="category">
-  </div>
+   <pre>
+  <?php
+    $stmt = $pdo->prepare('select * from category');
+    $stmt->execute();
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC ); 
+    ?>
+    </pre>
+  <select name="category" class="form-control">
+    <!-- <option value="">select category</option> -->
+    <?php
+    foreach ($categories as $category) {
+        echo "<option value='".$category['categoryId']."'>".$category['categoryName']."</option>";
+    }
+    ?>
+    
+    
+  </select><br>
   <input type="submit" value="modify product" class="btn btn-primary btn-lg" name="modify"></input>
   <?php 
    if(isset($_POST['modify'])){
@@ -51,9 +64,9 @@ include 'include/nav.php'?>
     if (!empty($name) && !empty($price)) {
         $stmt = $pdo->prepare('update product 
                                     set productName = ?,
-                                    productPrice = ?
-                                    discount = ?
-                                    category = ?
+                                    productPrice = ?,
+                                    discount = ?,
+                                    categoryId = ?
                                     where productId = ?
                                                 ');
         $stmt->execute([$name,$price,$discount,$category,$id]);

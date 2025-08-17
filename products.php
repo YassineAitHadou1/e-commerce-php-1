@@ -30,11 +30,14 @@ include 'include/nav.php'?>
         require_once 'include/conn.php';
         $products = $pdo->query("select product.*,category.categoryName as 'categoryName' from product inner join category on product.categoryId = category.categoryId")->fetchAll(pdo::FETCH_ASSOC);
         foreach ($products as $product) {
+            $price = $product['productPrice'];
+            $discount = $product['discount'];
+            $finalePrice = $price - ($price*$discount)/100;
             ?>
             <tr>
             <td> <?php echo $product['productId']; ?></td>
             <td> <?php echo $product['productName']; ?></td>
-            <td> <?php echo $product['productPrice'];?> dh</td>
+            <td> <?php echo $finalePrice;?> dh</td>
             <td> <?php echo $product['discount']; ?>%</td>
             <td> <?php echo $product['categoryName']; ?></td>
             <td> <?php echo $product['creation_date']; ?></td>

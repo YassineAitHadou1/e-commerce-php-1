@@ -32,24 +32,30 @@ include 'include/nav.php'?>
     <label class="form-label">description</label><br>
     <textarea  class="form-control" name="categoryDesc"><?= $category->description?></textarea>
   </div>
+  <div class="mb-3">
+    <label class="form-label">icon</label>
+    <input type="text" class="form-control" value='<?= $category->categoryIcon?>' name="categoryIcon">
+  </div>
   <input type="submit" value="modify category" class="btn btn-primary btn-lg" name="modify"></input>
   <?php 
    if(isset($_POST['modify'])){
     $name = $_POST['categoryName'];
     $desc = $_POST['categoryDesc'];
+    $icon = $_POST['categoryIcon'];
 
-    if (!empty($name) && !empty($desc)) {
+    if (!empty($name) && !empty($desc) && !empty($icon)) {
         $stmt = $pdo->prepare('update category 
                                     set categoryName = ?,
-                                    description = ?
+                                    description = ?,
+                                    categoryIcon = ?
                                     where categoryId = ?
                                                 ');
-        $stmt->execute([$name,$desc,$id]);
+        $stmt->execute([$name,$desc,$icon,$id]);
             header('location:categories.php');
     }else{
         ?>
         <div class="alert alert-danger" role="alert">
-            name and description are required!
+            name,description and icon are required!
         </div>
                <?php
     }

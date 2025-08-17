@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>categories</title>
 </head>
 <body>
@@ -19,6 +20,7 @@ include 'include/nav.php'?>
             <th>ID</th>
             <th>NAME</th>
             <th>DESCRIPTION</th>
+            <th>ICON</th>
             <th>DATE</th>
             <th>OPERATION</th>
         </tr>
@@ -33,6 +35,7 @@ include 'include/nav.php'?>
                     <td><?php echo $category['categoryId']; ?></td>
                     <td><?php echo $category['categoryName'];?></td>
                     <td><?php echo $category['description'];?></td>
+                    <td><i class="<?php echo $category['categoryIcon'];?>"></i></td>
                     <td><?php echo $category['creation_date'];?></td>
                     <td>
                         <a href="modifyCategory.php?id=<?php echo $category['categoryId'] ?>" class="btn btn-primary">Modify</a>
