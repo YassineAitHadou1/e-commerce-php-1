@@ -28,11 +28,12 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
             <?php 
             foreach ($products as $product) {
                 ?>
-                <div class="card mb-3 col-md-4">
-                    <img src="https://placehold.jp/3d4070/ffffff/200x150.png" class="card-img-top" alt="...">
+                <div class="card mb-3 col-md-4 p-0 m-1">
+                    <img width="250" height="350" src="../upload/product/<?= $product['productImg'] ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $product['productName']; ?></h5>
-                        <p class="card-text"><?php echo $product['productPrice']; ?> Dh</p>
+                        <p class="card-text"><?php echo $product['productDescription']; ?></p>
+                        <p class="card-text"><?php echo $product['productPrice']; ?> dh</p>
                         <p class="card-text"><small class="text-body-secondary"> added <?= date_format(date_create($product['creation_date']),'Y/m/d') ; ?></small></p>
                     </div>
                 </div>
@@ -41,7 +42,7 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
             if (empty($products)) {
                 ?>
                 <div class="alert alert-info" role="alert">
-                no products for now
+                no products for now 
                 </div>
                 <?php
             }

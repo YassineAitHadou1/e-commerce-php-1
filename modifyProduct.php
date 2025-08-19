@@ -19,7 +19,60 @@ include 'include/nav.php'?>
     $stmt->execute([$id]);
     $product = $stmt->fetch(pdo::FETCH_OBJ);
     ?>
-<form  method="post">
+
+  <?php 
+   if(isset($_POST['modify'])){
+    $name = $_POST['productName'];
+    $price = $_POST['productPrice'];
+    $discount = $_POST['discount'];
+    $category = $_POST['category'];
+    $productDescription = $_POST['productDescription'];
+    $productImg = '';
+        if (!empty($_FILES['productImg']['name'])){
+          $formImg = $_FILES['productImg']['name'];
+          $productImg = uniqid().$formImg;
+        }
+
+    if (!empty($name) && !empty($price)) {
+
+      if(!empty($productImg)){
+        move_uploaded_file($_FILES['productImg']['tmp_name'],'upload/product/'.$productImg);
+        $stmt = $pdo->prepare('update product 
+                                    set productName = ?,
+                                    productPrice = ?,
+                                    discount = ?,
+                                    categoryId = ?,
+                                    productImg = ?,
+                                    productDescription = ?
+                                    where productId = ?
+                                                ');
+        $stmt->execute([$name,$price,$discount,$category,$productImg,$productDescription,$id]);
+            header('location:products.php');
+      }else{
+        $stmt = $pdo->prepare('update product 
+                                    set productName = ?,
+                                    productPrice = ?,
+                                    discount = ?,
+                                    categoryId = ?,
+                                    productDescription = ?
+                                    where productId = ?
+                                                ');
+        $stmt->execute([$name,$price,$discount,$category,$productDescription,$id]);
+            header('location:products.php');
+      }
+
+
+        
+    }else{
+        ?>
+        <div class="alert alert-danger" role="alert">
+            fields are required!
+        </div>
+               <?php
+    }
+   }
+    ?>
+    <form  method="post" enctype="multipart/form-data">
   <div class="mb-3" hidden>
     <label class="form-label">id</label>
     <input type="number" class="form-control" value="<?= $product->productId?>" name="productId">
@@ -50,36 +103,19 @@ include 'include/nav.php'?>
         echo "<option value='".$category['categoryId']."'>".$category['categoryName']."</option>";
     }
     ?>
-    
-    
   </select><br>
-  <input type="submit" value="modify product" class="btn btn-primary btn-lg" name="modify"></input>
-  <?php 
-   if(isset($_POST['modify'])){
-    $name = $_POST['productName'];
-    $price = $_POST['productPrice'];
-    $discount = $_POST['discount'];
-    $category = $_POST['category'];
-
-    if (!empty($name) && !empty($price)) {
-        $stmt = $pdo->prepare('update product 
-                                    set productName = ?,
-                                    productPrice = ?,
-                                    discount = ?,
-                                    categoryId = ?
-                                    where productId = ?
-                                                ');
-        $stmt->execute([$name,$price,$discount,$category,$id]);
-            header('location:products.php');
-    }else{
+    <div class="mb-3">
+        <label class="form-label">image</label><br>
+        <input type="file" class="form-control" name="productImg" ></input>
+        <?php
         ?>
-        <div class="alert alert-danger" role="alert">
-            fields are required!
-        </div>
-               <?php
-    }
-   }
-    ?>
+        <img width="250" src="upload/product/<?= $product->productImg ?>">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">description</label><br>
+        <textarea class="form-control" name="productDescription" ><?= $product->productDescription ?></textarea>
+      </div> 
+  <input type="submit" value="modify product" class="btn btn-primary btn-lg" name="modify"></input>
 </form>
 </div>
 </body>

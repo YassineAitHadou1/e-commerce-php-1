@@ -22,7 +22,7 @@
                 <li class="list-group-item">
                     
                     <a  class="btn btn-light" href="category.php?id=<?php echo $category->categoryId?>">
-                        <i class="<?php echo $category->categoryIcon;?>"></i> 
+                        <i class="<?php echo $category->categoryIcon;?>"></i>
                         <?php echo $category->categoryName;?>
                     </a>
                 </li>

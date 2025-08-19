@@ -20,10 +20,18 @@ include_once 'include/conn.php';
         $productPrice = $_POST['productPrice'];
         $discount = $_POST['discount'];
         $category = $_POST['category'];
+        $productDescription = $_POST['productDescription']; 
+        
+        $productImg = 'product.png';
+        if (!empty($_FILES['productImg']['name'])){
+          $formImg = $_FILES['productImg']['name'];
+          $productImg = uniqid().$formImg;
+          move_uploaded_file($_FILES['productImg']['tmp_name'],'upload/product/'.$productImg);
+        }
 
         if (!empty($productName) && !empty($productPrice)  && !empty($category) ) {
-            $stmt = $pdo->prepare('insert into product(productName,productPrice,discount,categoryId) values (?,?,?,?)');
-            $stmt->execute([$productName,$productPrice,$discount,$category]);
+            $stmt = $pdo->prepare('insert into product(productName,productPrice,discount,categoryId,productDescription,productImg) values (?,?,?,?,?,?)');
+            $stmt->execute([$productName,$productPrice,$discount,$category,$productDescription,$productImg]);
             header('location:products.php');
         }else{
             ?>
@@ -34,7 +42,7 @@ include_once 'include/conn.php';
         }
     }
     ?>
-<form  method="post">
+<form  method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label class="form-label">name</label>
     <input type="text" class="form-control" name="productName" >
@@ -61,9 +69,15 @@ include_once 'include/conn.php';
         echo "<option value='".$category['categoryId']."'>".$category['categoryName']."</option>";
     }
     ?>
-    
-    
   </select><br>
+  <div class="mb-3">
+    <label class="form-label">image</label><br>
+    <input type="file" class="form-control" name="productImg" ></input>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">description</label><br>
+    <textarea class="form-control" name="productDescription" ></textarea>
+  </div> 
   <input type="submit" value="Add Product" class="btn btn-primary btn-lg" name="add"></input>
 </form>
 </div>

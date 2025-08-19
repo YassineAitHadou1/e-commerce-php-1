@@ -21,6 +21,8 @@ include 'include/nav.php'?>
             <th>PRICE</th>
             <th>DISCOUNT</th>
             <th>CATEGORY</th>
+            <th>DESCRIPTION</th>
+            <th>IMAGE</th>
             <th>DATE</th>
             <th>OPERATION</th>
         </tr>
@@ -40,6 +42,8 @@ include 'include/nav.php'?>
             <td> <?php echo $finalePrice;?> dh</td>
             <td> <?php echo $product['discount']; ?>%</td>
             <td> <?php echo $product['categoryName']; ?></td>
+            <td> <?php echo $product['productDescription']; ?></td>
+            <td> <img width="50" height="50" src="upload/product/<?= $product['productImg'] ?>"></td>
             <td> <?php echo $product['creation_date']; ?></td>
             <td>
                 <a href="modifyProduct.php?id=<?php echo $product['productId']?>" class="btn btn-primary">modify</a>
