@@ -10,6 +10,20 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="index.php">Categories</a>
         </li>
+        <?php
+        if (!empty($_GET['productId'])) {
+        include_once '../include/conn.php';
+        $categoryId = $_GET['categoryId'];
+        $stmt = $pdo->prepare('select * from category where categoryId = ?');
+        $stmt->execute([$categoryId]);
+        $category = $stmt->fetch(pdo::FETCH_ASSOC);
+          ?>
+          <li class="nav-item">
+              <a  class="nav-link" href="category.php?id=<?php echo $category['categoryId'];?>">products</a>
+          </li>
+          <?php
+        }
+        ?>
       </ul>
     </div>
   </div>

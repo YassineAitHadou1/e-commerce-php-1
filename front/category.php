@@ -21,6 +21,9 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <?php 
+    include 'navFront.php';
+    ?>
     
     <div class="container">
         <h1><?php echo $category['categoryName']; ?> <i class="<?php echo $category['categoryIcon']?>"></i></h1>
@@ -31,6 +34,7 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
                 <div class="card mb-3 col-md-4 p-0 m-1">
                     <img width="250" height="350" src="../upload/product/<?= $product['productImg'] ?>" class="card-img-top" alt="...">
                     <div class="card-body">
+                        <a href="product.php?productId=<?php echo $product['productId'];?>&categoryId=<?php echo $category['categoryId'];?>" class=" btn stretched-link">details</a>
                         <h5 class="card-title"><?php echo $product['productName']; ?></h5>
                         <p class="card-text"><?php echo $product['productDescription']; ?></p>
                         <p class="card-text"><?php echo $product['productPrice']; ?> dh</p>
