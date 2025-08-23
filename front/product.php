@@ -1,9 +1,12 @@
 <?php
+session_start();
 require_once '../include/conn.php';
 $id = $_GET['productId'];
 $stmt = $pdo->prepare('select * from product where productId = ?');
 $stmt->execute([$id]);
 $product = $stmt->fetch(pdo::FETCH_ASSOC);
+
+
 
     
 ?>
@@ -15,6 +18,7 @@ $product = $stmt->fetch(pdo::FETCH_ASSOC);
     <title><?php echo $product['productName']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/css/product.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <?php 
@@ -31,7 +35,6 @@ $product = $stmt->fetch(pdo::FETCH_ASSOC);
                 <div class="col-md-6">
                     <div class="d-flex align-items-center">
                         <h1 class="w-75"><?=  $product['productName']; ?></h1>
-
                         <?php
                             $price = $product['productPrice'] ;
                             $discount = $product['discount'];
@@ -67,13 +70,18 @@ $product = $stmt->fetch(pdo::FETCH_ASSOC);
                     }
                     ?> 
                         <hr>
+                        
+                        <?php
+                        $productId = $product['productId'];
+                        include '../include/front/counter.php'; 
+                        ?>
+                        <hr>
                         <a class="btn btn-primary" href="#">add to cart</a>
                 </div>
             </div>
             
         </div>
-        
-
     </div>
+<script src="../assets/js/product/counter.js"></script>
 </body>
 </html>

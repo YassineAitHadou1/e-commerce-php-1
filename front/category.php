@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../include/conn.php';
 $id = $_GET['id'];
 $stmt = $pdo->prepare('select * from category where categoryId = ?');
@@ -18,6 +19,7 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>category | <?php echo $category['categoryName']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/product.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -30,15 +32,22 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
         <div class="row">
             <?php 
             foreach ($products as $product) {
+            $productId = $product['productId'];
+            $categoryId = $category['categoryId'];
+
+
                 ?>
-                <div class="card mb-3 col-md-4 p-0 m-1">
-                    <img width="250" height="350" src="../upload/product/<?= $product['productImg'] ?>" class="card-img-top" alt="...">
+                <div class="card mx-1 d-flex align-items-center col-md-3 ">
+                    <img src="../upload/product/<?= $product['productImg'] ?>" class="card-img-top w-50 h-50" alt="<?php $product['productName']?>">
                     <div class="card-body">
-                        <a href="product.php?productId=<?php echo $product['productId'];?>&categoryId=<?php echo $category['categoryId'];?>" class=" btn stretched-link">details</a>
+                        <a href="product.php?productId=<?php echo $product['productId'];?>&categoryId=<?php echo $categoryId;?>" class="btn stretched-link">details</a>
                         <h5 class="card-title"><?php echo $product['productName']; ?></h5>
                         <p class="card-text"><?php echo $product['productDescription']; ?></p>
                         <p class="card-text"><?php echo $product['productPrice']; ?> dh</p>
                         <p class="card-text"><small class="text-body-secondary"> added <?= date_format(date_create($product['creation_date']),'Y/m/d') ; ?></small></p>
+                    </div>
+                    <div class="card-footer" style="z-index : 10">   
+                        <?php include '../include/front/counter.php'; ?>
                     </div>
                 </div>
                 <?php
@@ -54,5 +63,6 @@ $products = $stmt->fetchAll(pdo::FETCH_ASSOC);
             
         </div>
     </div>
+    <script src="../assets/js/product/counter.js"></script>
 </body>
 </html>

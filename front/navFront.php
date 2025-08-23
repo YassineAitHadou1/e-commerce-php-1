@@ -26,5 +26,7 @@
         ?>
       </ul>
     </div>
+      <a href="cart.php" class="btn"><i class="fa-solid fa-cart-shopping"></i></a>
+
   </div>
 </nav>
