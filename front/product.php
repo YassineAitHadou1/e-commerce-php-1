@@ -73,10 +73,11 @@ $product = $stmt->fetch(pdo::FETCH_ASSOC);
                         
                         <?php
                         $productId = $product['productId'];
+                        $categoryId = $product['categoryId'];
                         include '../include/front/counter.php'; 
                         ?>
                         <hr>
-                        <a class="btn btn-primary" href="#">add to cart</a>
+                        <a class="btn btn-primary" href="cart.php">add to cart</a>
                 </div>
             </div>
             
