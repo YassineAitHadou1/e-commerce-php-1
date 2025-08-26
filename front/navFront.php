@@ -28,6 +28,7 @@
     </div>
     
     <?php
+    $_SESSION['cart'] = [];
     $userId = $_SESSION['user']['userId'];
      ?>
       <a href="cart.php" class="btn"><i class="fa-solid fa-cart-shopping"></i>(<?= count($_SESSION['cart'][$userId])?>)</a>
