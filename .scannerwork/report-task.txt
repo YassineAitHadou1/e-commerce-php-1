@@ -1,0 +1,6 @@
+projectKey=ecommerce:php
+serverUrl=http://localhost:9000
+serverVersion=25.11.0.114957
+dashboardUrl=http://localhost:9000/dashboard?id=ecommerce%3Aphp
+ceTaskId=0f0cb07e-d78c-4f11-9ade-6d5e707bae2b
+ceTaskUrl=http://localhost:9000/api/ce/task?id=0f0cb07e-d78c-4f11-9ade-6d5e707bae2b
